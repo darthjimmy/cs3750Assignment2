@@ -48,9 +48,7 @@ namespace cs3750Assignment2
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
+            app.UseWebSockets();
 
             app.UseMvc();
         }
