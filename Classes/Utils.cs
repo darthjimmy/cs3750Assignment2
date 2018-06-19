@@ -27,10 +27,10 @@ namespace Conway
             return Color.FromArgb(r, g, b);
         }
 
-        public static GameBoard FillBoard(int size, int numCells)
+        public static GameBoard FillBoard(int size, int numAlive)
         {
             GameBoard board = new GameBoard(size);
-            for (int i = 0; i < numCells; i++)
+            for (int i = 0; i < numAlive; i++)
             {
                 int x = rand.Next(1, board.Size - 2); // we want to skip the last cell in the row
                 int y = rand.Next(1, board.Size - 2); // we want to skip the last cell in a column
