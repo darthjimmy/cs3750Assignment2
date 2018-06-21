@@ -1,9 +1,57 @@
 <!DOCTYPE html>
 <html>
     <body>
-       <canvas id="chart" width="600" height="450"></canvas>  
+       
+       <canvas id="chart" width="500" height="500" onclick="findCoords(event)"></canvas>  
         <input type="Submit" id="starter" name="starter" value="Start Game">
         <input type="Submit" id="stopper" name="stopper" value="Stop Game">
         <input type="Submit" id="reseter" name="reseter" value="Reset Game">
+     <script>
+        var i;
+        var k;
+        var arr = new Array(51);//[50,50] This is for the starting arr
+        var arr2 = new Array(51);//[50,50] This is for the ending arr
+        for (var i = 0;i<51;i++)
+        {
+         arr[i] = new Array(51); 
+         arr2[i] = new Array(51);
+        }
+        for (i = 0; i <51; i++)
+        {
+          for (k =0;k<51;k++)
+          {
+             arr[i,k] = 0;
+             arr2[i,k] = 0;
+          }
+        }
+        var c=document.getElementById("chart");
+        var ctx=c.getContext("2d");
+        for (i = 0; i < 500; i = i + 10)
+        {
+          ctx.beginPath();
+          ctx.moveTo(i,0);
+          ctx.lineTo(i,500);
+          ctx.stroke();
+        }
+       for (i = 0; i < 500; i = i + 10)
+        {
+          ctx.beginPath();
+          ctx.moveTo(0,i);
+          ctx.lineTo(500,i);
+          ctx.stroke();
+        }
+       
+       function findCoords(event)
+       {
+         var x = event.clientX;     // Get the horizontal coordinate
+         x = Math.round(x/10);
+          var y = event.clientY;     // Get the vertical coordinate
+         y = Math.round(y/10);
+          var coor = "X coords: " + x + ", Y coords: " + y;
+          arr[x,y]=(arr[x,y]+1) % 2;
+         alert(coor);
+         alert("arr at that location: " + arr[x,y]);
+       }
+      </script>
     </body>
 </html>
