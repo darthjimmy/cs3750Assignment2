@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace Conway
 {
@@ -32,8 +34,13 @@ namespace Conway
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
-            app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Pages")),
+                    RequestPath = "/Pages"
+            });
             app.UseMvc();
             app.Map("/ws", SocketHandler.Map);
         }
