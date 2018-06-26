@@ -2,8 +2,8 @@
 <html>
     <body>
        
-       <canvas id="chart" width="500" height="500" onclick="findCoords(event)"></canvas>  
-        <input type="Submit" id="starter" name="starter" value="Start Game">
+       <canvas id="chart" width="500" height="499" onclick="findCoords(event)"></canvas>  
+        <input type="Submit" id="starter" name="starter" value="Start Game" onclick=starter1()>
         <input type="Submit" id="stopper" name="stopper" value="Stop Game">
         <input type="Submit" id="reseter" name="reseter" value="Reset Game">
      <script>
@@ -11,6 +11,8 @@
         var k;
         var arr = new Array(51);//[50,50] This is for the starting arr
         var arr2 = new Array(51);//[50,50] This is for the ending arr
+         var x;
+         var y;
         for (var i = 0;i<51;i++)
         {
          arr[i] = new Array(51); 
@@ -20,8 +22,8 @@
         {
           for (k =0;k<51;k++)
           {
-             arr[i,k] = 0;
-             arr2[i,k] = 0;
+             arr[i][k] = false;
+             arr2[i][k] = false;
           }
         }
         var c=document.getElementById("chart");
@@ -40,18 +42,54 @@
           ctx.lineTo(500,i);
           ctx.stroke();
         }
+         
        
        function findCoords(event)
        {
-         var x = event.clientX;     // Get the horizontal coordinate
+         x = event.clientX - 3;     // Get the horizontal coordinate
          x = Math.round(x/10);
-          var y = event.clientY;     // Get the vertical coordinate
+          y = event.clientY - 3     // Get the vertical coordinate
          y = Math.round(y/10);
           var coor = "X coords: " + x + ", Y coords: " + y;
-          arr[x,y]=(arr[x,y]+1) % 2;
-         alert(coor);
-         alert("arr at that location: " + arr[x,y]);
+          if (arr[x][y] == false)
+          {
+           arr[x][y]=true;
+          }
+           else
+           {
+            arr[x][y] = false;   
+           }
+       //  alert(coor);
+      //  alert("arr at that location: " + arr[x][y]);
+           colorin();
        }
+         
+         function colorin()
+         {
+             if(arr[x][y] == false)
+             {
+                x = Math.floor(x * 10);
+                y = Math.floor(y * 10);
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(x, y, -10, -10);
+            }
+             else
+             {
+                 x = Math.floor(x * 10);
+                y = Math.floor(y * 10);
+                ctx.fillStyle = "#000000";
+                ctx.fillRect(x, y, -10, -10);
+             }
+         }
+         
+         function starter1()
+         {
+             //alert("Hi");
+            //var jsonString = 
+                alert(JSON.stringify(arr)); 
+            // alert(jsonstring);
+            // alert("no");
+         }
       </script>
     </body>
 </html>
