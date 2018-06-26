@@ -14,7 +14,8 @@ namespace Conway
     public class SocketHandler
     {
         public const int BufferSize = 4096;
-        private Server _servers;
+        //private Server _servers;
+        private Server _server;
 
         WebSocket _socket;
 
@@ -25,8 +26,14 @@ namespace Conway
 
         async Task<GameBoard> NewGame()
         {
-            Server server = new Server(16, 0);
-            return await Task.Run( () => server.GetBoard());
+            if (_server != null)
+            {
+                _server.Stop();
+                _server = null;
+            }
+
+            _server = new Server(16, 0);
+            return await Task.Run( () => _server.GetBoard());
         }
 
         async Task EchoLoop()
@@ -55,14 +62,16 @@ namespace Conway
                         switch (buff)
                         {
                             case "NewGame":
-                                response = "Starting a new game!";
-                                //response = JsonConvert.SerializeObject(NewGame());
+                                //response = "Starting a new game!";
+                                response = JsonConvert.SerializeObject(await NewGame());
                                 break;
                             case "Start":
-                                response = "Starting Server";
+                                //response = "Starting Server";
+                                response = JsonConvert.SerializeObject(_server.GetBoard());
                                 break;
                             case "Stop":
                                 response = "Stopping Server";
+                                _server.Stop();
                                 break;
                         }
                     }

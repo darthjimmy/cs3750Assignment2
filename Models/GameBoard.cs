@@ -14,6 +14,14 @@ namespace Conway
 
             // create an empty array
             Cells = new Cell[Size, Size];
+
+            for (int i = 0; i < Size; i++)
+            {
+                for (int j = 0; j < Size; j++)
+                {
+                    Cells[i, j] = new Cell();
+                }
+            }
         }
 
         // copy constructor
