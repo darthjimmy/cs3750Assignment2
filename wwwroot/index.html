@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <script src="jquery-3.3.1.js"></script>
+    </head>
     <body>
        
        <canvas id="chart" width="500" height="500" onclick="findCoords(event)"></canvas>  
@@ -7,6 +10,9 @@
         <input type="Submit" id="stopper" name="stopper" value="Stop Game">
         <input type="Submit" id="reseter" name="reseter" value="Reset Game">
      <script>
+         
+         
+         var helper;
         var i;
         var k;
         var arr = new Array(51);//[50,50] This is for the starting arr
@@ -86,9 +92,14 @@
          {
              //alert("Hi");
             //var jsonString = 
-                alert(JSON.stringify(arr)); 
             // alert(jsonstring);
             // alert("no");
+            // var websocket = new WebSocket(Enter file name here);
+             //JSON.stringify(arr)}, 
+               //  websocket.send(JSON.stringify({
+               //  id: "client1",
+               //      data: arr
+               // }));
          }
       </script>
     </body>
