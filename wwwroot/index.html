@@ -103,6 +103,11 @@
                      data: arr
                      }));
                  }
+                 websocket.onmessage = function (event)
+                 {
+                    alert(event.date);   
+                     
+                 }
          }
       </script>
     </body>
