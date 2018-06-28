@@ -93,21 +93,26 @@
             //var jsonString = 
             // alert(jsonstring);
             // alert("no");
+             alert("opening socket");
              var websocket = new WebSocket("ws://" + window.location.host + "/ws");
+             alert("step2");
              //JSON.stringify(arr)}, 
                  websocket.onopen = function (event)
                  {
+                     alert("socket open/sending info now");
                      websocket.send(JSON.stringify({
                      command: "start",
                      id: "client1",
                      data: arr
                      }));
+                     alert("info sent");
                  }
                  websocket.onmessage = function (event)
                  {
                     alert(event.data);   
-                     
+                     alert("info back");
                     websocket.close();
+                     alert("socket closed");
                  }
                  
          }
