@@ -97,7 +97,8 @@
              var websocket = new WebSocket("/ws");
              //JSON.stringify(arr)}, 
                  websocket.send(JSON.stringify({
-                 id: "client1",
+                     command: "start",
+                     id: "client1",
                      data: arr
                 }));
          }
