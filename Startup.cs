@@ -37,7 +37,7 @@ namespace Conway
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc();
-            app.Map("/ws", SocketHandler.Map);
+            app.Map("/conway/ws", SocketHandler.Map);
         }
     }
 }
