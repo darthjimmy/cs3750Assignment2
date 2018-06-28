@@ -59,15 +59,17 @@ namespace Conway
                     using (var reader = new StreamReader(ms, Encoding.UTF8))
                     {
                         var buff = reader.ReadToEnd();
-                        switch (buff)
+
+                        ClientMessage message = JsonConvert.DeserializeObject<ClientMessage>(buff);
+                        switch (message.Command)
                         {
                             case "NewGame":
                                 //response = "Starting a new game!";
                                 response = JsonConvert.SerializeObject(await NewGame());
                                 break;
-                            case "Start":
-                                //response = "Starting Server";
-                                response = JsonConvert.SerializeObject(_server.GetBoard());
+                            case "start":
+                                response = "Starting Server";
+                                //response = JsonConvert.SerializeObject(_server.GetBoard());
                                 break;
                             case "Stop":
                                 response = "Stopping Server";
