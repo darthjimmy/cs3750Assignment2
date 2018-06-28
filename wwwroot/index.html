@@ -94,13 +94,16 @@
             //var jsonString = 
             // alert(jsonstring);
             // alert("no");
-             var websocket = new WebSocket("/ws");
+             var websocket = new WebSocket("ws://" + window.location.host + "/ws");
              //JSON.stringify(arr)}, 
-                 websocket.send(JSON.stringify({
+                 websocket.onopen = function (event)
+                 {
+                     websocket.send(JSON.stringify({
                      command: "start",
                      id: "client1",
                      data: arr
-                }));
+                     }));
+                 }
          }
       </script>
     </body>
