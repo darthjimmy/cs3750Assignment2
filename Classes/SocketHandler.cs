@@ -61,6 +61,7 @@ namespace Conway
                         var buff = reader.ReadToEnd();
 
                         ClientMessage message = JsonConvert.DeserializeObject<ClientMessage>(buff);
+                        
                         switch (message.Command)
                         {
                             case "NewGame":
@@ -71,6 +72,8 @@ namespace Conway
                                 response = "Starting Server";
                                 //response = JsonConvert.SerializeObject(_server.GetBoard());
                                 break;
+                            case "update":
+                            
                             case "Stop":
                                 response = "Stopping Server";
                                 _server.Stop();

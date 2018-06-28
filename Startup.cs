@@ -35,12 +35,6 @@ namespace Conway
         public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "Pages")),
-                    RequestPath = "/Pages"
-            });
             app.UseMvc();
             app.Map("/ws", SocketHandler.Map);
         }
