@@ -94,7 +94,7 @@
             // alert(jsonstring);
             // alert("no");
              alert("opening socket");
-             var websocket = new WebSocket("ws://" + window.location.host + "/conway");
+             var websocket = new WebSocket("wss://" + window.location.host + "/conway/ws");
              alert("step2");
              //JSON.stringify(arr)}, 
                  websocket.onopen = function (event)
