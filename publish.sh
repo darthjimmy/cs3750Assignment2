@@ -1,2 +1,2 @@
 sudo dotnet publish -o /var/Conway --configuration Release
-sudo supervisorctl restart Program
+sudo systemctl restart kestrel-conway.service
