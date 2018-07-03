@@ -62,7 +62,7 @@
        function clienter()
          {
             color = clientC.value;
-             alert(color);
+             //alert(color);
          }
        
        function findCoords(event)
@@ -145,7 +145,7 @@
                      alert("socket open/sending info now");
                      websocket.send(JSON.stringify({
                      command: "start",
-                     id: "client1",
+                     id: color,
                      data: arr
                      }));
                      alert("info sent");
