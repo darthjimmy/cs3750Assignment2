@@ -49,6 +49,7 @@
           ctx.lineTo(500,i);
           ctx.stroke();
         }
+         clearer();
          
        
        function findCoords(event)
@@ -93,7 +94,7 @@
          var z;
          function clearer()
          {
-             alert("started clear");
+             //alert("started clear");
             for (x = 1; x < 51; x++)
             {
                 for (y = 1; y < 51; y++)
@@ -106,7 +107,7 @@
                 }
                 
             }
-             alert("done with clear");
+             //alert("done with clear");
          }
          
          function starter1()
