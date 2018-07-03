@@ -32,7 +32,7 @@ namespace Conway
                 _server = null;
             }
 
-            _server = new Server(16, 0);
+            _server = new Server(50, 0);
             return await Task.Run( () => _server.GetBoard());
         }
 
@@ -69,8 +69,11 @@ namespace Conway
                                 response = JsonConvert.SerializeObject(await NewGame());
                                 break;
                             case "start":
-                                response = "Starting Server";
-                                //response = JsonConvert.SerializeObject(_server.GetBoard());
+                                //response = "Starting Server";
+                                if (_server == null)
+                                    await NewGame();
+
+                                response = JsonConvert.SerializeObject(_server.GetBoard());
                                 break;
                             case "update":
                             
