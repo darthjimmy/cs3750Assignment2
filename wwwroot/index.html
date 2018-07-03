@@ -104,15 +104,17 @@
          {
              if(arr[x][y] == false)
              {
+                 w = x;
+                 z = y;
                 x = Math.floor(x * 10);
                 y = Math.floor(y * 10);
                 ctx.fillStyle = White;
                 ctx.fillRect(x, y, -9, -9);
-                arrC[0] = x;
-                arrC[1] = y;
+                arrC[0] = w;
+                arrC[1] = z;
                  
                  /* websocket.send(JSON.stringify({
-                     command: "start",
+                     command: "update",
                      id: White,
                      data: arrC
                      }));
@@ -130,15 +132,17 @@
             }
              else
              {
+                 w = x;
+                 z = y;
                  x = Math.floor(x * 10);
                 y = Math.floor(y * 10);
                 ctx.fillStyle = color;
                 ctx.fillRect(x, y, -9, -9);
-                arrC[0] = x;
-                arrC[1] = y;
+                arrC[0] = w;
+                arrC[1] = z;
                  
                 /* websocket.send(JSON.stringify({
-                     command: "start",
+                     command: "update",
                      id: color,
                      data: arrC
                      }));
