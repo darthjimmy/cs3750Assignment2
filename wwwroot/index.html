@@ -92,13 +92,13 @@
          function clearer()
          {
              alert("started clear");
-            for (x = 0; x < 51; x++)
+            for (x = 1; x < 51; x++)
             {
-                for (y = 0; y < 51; y++)
+                for (y = 1; y < 51; y++)
                 {
-                    x = Math.floor(x * 10);
-                    y = Math.floor(y * 10);
-                    ctx.fillStyle = "#000000";
+                    x = (x * 10);
+                    y = (y * 10);
+                    ctx.fillStyle = "#FFFFFF";
                     ctx.fillRect(x, y, -9, -9);
                 }
                 
