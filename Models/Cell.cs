@@ -1,10 +1,12 @@
 using System.Drawing;
+using Newtonsoft.Json;
 
 namespace Conway
 {
     public class Cell
     {
         private Color _color;
+        
         public string Color
         { 
             get
@@ -16,6 +18,8 @@ namespace Conway
                 _color = ColorTranslator.FromHtml(value);
             }
         }
+
+        [JsonIgnore]
         public bool Alive { get; set; }
 
         public Cell()

@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Drawing;
+using Newtonsoft.Json;
 
 namespace Conway
 {
     public class GameBoard
     {
+        [JsonIgnore]
         public int Size { get; set; }
         public Cell[,] Cells { get; set; }
 
