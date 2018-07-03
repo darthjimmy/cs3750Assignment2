@@ -20,6 +20,7 @@
      <script>
          
              
+             var url = "ws://" + window.location.host + "/conway/ws"
             // alert("opening socket");
              //var websocket = new WebSocket(url);
             // alert("step2");
@@ -29,7 +30,7 @@
         var k;
         var arr = new Array(51);//[50,50] This is for the starting arr
         var arr2 = new Array(51);//[50,50] This is for the ending arr
-         //var arrC = new Array(2);
+        var arrC = new Array(2);
          var x;
          var y;
          
@@ -107,8 +108,8 @@
                 y = Math.floor(y * 10);
                 ctx.fillStyle = White;
                 ctx.fillRect(x, y, -9, -9);
-                 //arrC[0] = x;
-                // arrC[1] = y;
+                arrC[0] = x;
+                arrC[1] = y;
                  
                  /* websocket.send(JSON.stringify({
                      command: "start",
@@ -133,8 +134,8 @@
                 y = Math.floor(y * 10);
                 ctx.fillStyle = color;
                 ctx.fillRect(x, y, -9, -9);
-                // arrC[0] = x;
-                // arrC[1] = y;
+                arrC[0] = x;
+                arrC[1] = y;
                  
                 /* websocket.send(JSON.stringify({
                      command: "start",
@@ -182,7 +183,6 @@
             // alert("no");
              //alert("opening socket");
              
-             var url = "ws://" + window.location.host + "/conway/ws"
              var websocket = new WebSocket(url);
              //alert("step2");
              //JSON.stringify(arr)}, 
