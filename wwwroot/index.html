@@ -19,14 +19,23 @@
         </select> 
      <script>
          
+             var url = "ws://" + window.location.host + "/conway/ws"
+             
+            // alert("opening socket");
+             //var websocket = new WebSocket(url);
+            // alert("step2");
          var color = "None";
          var helper;
         var i;
         var k;
         var arr = new Array(51);//[50,50] This is for the starting arr
         var arr2 = new Array(51);//[50,50] This is for the ending arr
+         var arrC = new Array(2);
          var x;
          var y;
+         
+         var w;
+         var z;
         for (var i = 0;i<51;i++)
         {
          arr[i] = new Array(51); 
@@ -97,8 +106,27 @@
              {
                 x = Math.floor(x * 10);
                 y = Math.floor(y * 10);
-                ctx.fillStyle = "#FFFFFF";
+                ctx.fillStyle = White;
                 ctx.fillRect(x, y, -9, -9);
+                 arrC[0] = x;
+                 arrC[1] = y;
+                 
+                 /* websocket.send(JSON.stringify({
+                     command: "start",
+                     id: White,
+                     data: arrC
+                     }));
+                     alert("info sent");
+                 websocket.onmessage = function (event)
+                 {
+                    alert(event.data);   
+                     alert("info back");
+                     //arr2 = JSON.parse(event.data);
+                     //color = JSON.parse(event.id);
+                    //websocket.close();
+                     //alert("socket closed");
+                     //colorinnew();
+                 }*/
             }
              else
              {
@@ -106,11 +134,28 @@
                 y = Math.floor(y * 10);
                 ctx.fillStyle = color;
                 ctx.fillRect(x, y, -9, -9);
+                 arrC[0] = x;
+                 arrC[1] = y;
+                 
+                /* websocket.send(JSON.stringify({
+                     command: "start",
+                     id: color,
+                     data: arrC
+                     }));
+                     alert("info sent");
+                 websocket.onmessage = function (event)
+                 {
+                    alert(event.data);   
+                     alert("info back");
+                     //arr2 = JSON.parse(event.data);
+                     //color = JSON.parse(event.id);
+                    //websocket.close();
+                     //alert("socket closed");
+                     //colorinnew();
+                 }*/
              }
          }
          
-         var w;
-         var z;
          function clearer()
          {
              //alert("started clear");
@@ -127,6 +172,7 @@
                 
             }
              //alert("done with clear");
+             return;
          }
          
          function starter1()
@@ -136,7 +182,6 @@
             // alert(jsonstring);
             // alert("no");
              alert("opening socket");
-             var url = "ws://" + window.location.host + "/conway/ws"
              var websocket = new WebSocket(url);
              alert("step2");
              //JSON.stringify(arr)}, 
@@ -154,10 +199,34 @@
                  {
                     alert(event.data);   
                      alert("info back");
-                    websocket.close();
-                     alert("socket closed");
+                     //arr2 = JSON.parse(event.data);
+                     //color = JSON.parse(event.id);
+                    //websocket.close();
+                     //alert("socket closed");
+                     //colorinnew();
                  }
                  
+         }
+         
+         function colorinnew()
+         {
+            clearer();
+             for (x = 1; x < 51; x++)
+            {
+                for (y = 1; y < 51; y++)
+                {
+                    if (arr2[x][y] == true)
+                    {
+                        w = (x * 10);
+                        z = (y * 10);
+                        ctx.fillStyle = color;
+                        ctx.fillRect(w, z, -9, -9);
+                        //alert("x:"+x+"  y:"+y);
+                    }
+                }
+                
+            }
+             
          }
       </script>
     </body>
