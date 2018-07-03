@@ -9,6 +9,7 @@
         <input type="Submit" id="starter" name="starter" value="Start Game" onclick=starter1()>
         <input type="Submit" id="stopper" name="stopper" value="Stop Game">
         <input type="Submit" id="reseter" name="reseter" value="Reset Game">
+        <input type="Submit" id="clearer" name="clearer" value="Clear Board" onclick=clear()>
      <script>
          
          
@@ -86,6 +87,21 @@
                 ctx.fillStyle = "#000000";
                 ctx.fillRect(x, y, -9, -9);
              }
+         }
+         
+         function clear()
+         {
+            for (x = 0; x < 50; x++)
+            {
+                for (y = 0; y < 50; y++)
+                {
+                    x = Math.floor(x * 10);
+                    y = Math.floor(y * 10);
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.fillRect(x, y, -9, -9);
+                }
+                
+            }
          }
          
          function starter1()
