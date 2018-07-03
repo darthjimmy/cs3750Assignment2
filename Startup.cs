@@ -36,6 +36,10 @@ namespace Conway
         {
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
             //app.UseMvc();
             app.Map("/ws", SocketHandler.Map);
         }
