@@ -89,6 +89,8 @@
              }
          }
          
+         var w;
+         var z;
          function clearer()
          {
              alert("started clear");
@@ -96,11 +98,11 @@
             {
                 for (y = 1; y < 51; y++)
                 {
-                    x = (x * 10);
-                    y = (y * 10);
+                    w = (x * 10);
+                    z = (y * 10);
                     ctx.fillStyle = "#FFFFFF";
-                    ctx.fillRect(x, y, -9, -9);
-                    alert("x:"+x+"  y:"+y);
+                    ctx.fillRect(w, z, -9, -9);
+                    //alert("x:"+x+"  y:"+y);
                 }
                 
             }
