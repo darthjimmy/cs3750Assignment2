@@ -10,9 +10,15 @@
         <input type="Submit" id="stopper" name="stopper" value="Stop Game">
         <input type="Submit" id="reseter" name="reseter" value="Reset Game">
         <input type="Submit" id="clearerb" name="clearerb" value="Clear Board" onclick=clearer()>
+        <select name="color" id ="clientC" onchange=clienter()>
+            <option value="red">red</option>
+            <option value="blue">blue</option>
+            <option value="black">black</option>
+            <option value="green">green</option>
+        </select> 
      <script>
          
-         
+         var color;
          var helper;
         var i;
         var k;
@@ -51,6 +57,12 @@
         }
          clearer();
          
+     
+       function clienter()
+         {
+            color = clientC.value;
+             alert(color);
+         }
        
        function findCoords(event)
        {
