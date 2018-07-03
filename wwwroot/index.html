@@ -181,24 +181,24 @@
             //var jsonString = 
             // alert(jsonstring);
             // alert("no");
-             alert("opening socket");
+             //alert("opening socket");
              var websocket = new WebSocket(url);
-             alert("step2");
+             //alert("step2");
              //JSON.stringify(arr)}, 
                  websocket.onopen = function (event)
                  {
-                     alert("socket open/sending info now");
+                     //alert("socket open/sending info now");
                      websocket.send(JSON.stringify({
                      command: "start",
                      id: color,
                      data: arr
                      }));
-                     alert("info sent");
+                    // alert("info sent");
                  }
                  websocket.onmessage = function (event)
                  {
                     alert(event.data);   
-                     alert("info back");
+                     //alert("info back");
                      //arr2 = JSON.parse(event.data);
                      //color = JSON.parse(event.id);
                     //websocket.close();
