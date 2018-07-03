@@ -43,6 +43,7 @@ namespace Conway
             });
             //app.UseMvc();
             app.Map("/ws", SocketHandler.Map);
+            app.Map("/conway/ws", SocketHandler.Map);
         }
     }
 }
