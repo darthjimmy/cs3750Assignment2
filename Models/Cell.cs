@@ -24,7 +24,7 @@ namespace Conway
 
         public Cell()
         {
-            _color = System.Drawing.Color.Gray;
+            _color = System.Drawing.Color.White;
             Alive = false;
         }
 
