@@ -11,10 +11,11 @@
         <input type="Submit" id="reseter" name="reseter" value="Reset Game">
         <input type="Submit" id="clearerb" name="clearerb" value="Clear Board" onclick=clearer()>
         <select name="color" id ="clientC" onchange=clienter()>
-            <option value="Red">red</option>
-            <option value="Blue">blue</option>
-            <option value="Black">black</option>
-            <option value="Green">green</option>
+            <option value="None">Choose Color</option>
+            <option value="Red">Red</option>
+            <option value="Blue">Blue</option>
+            <option value="Black">Black</option>
+            <option value="Green">Green</option>
         </select> 
      <script>
          
@@ -65,7 +66,13 @@
          }
        
        function findCoords(event)
-       {
+       { 
+           if (color == "None")
+           {
+               alert("You need to choose a color");
+                return;   
+           }
+           
          x = event.clientX - 3;     // Get the horizontal coordinate
          x = Math.round(x/10);
           y = event.clientY - 3     // Get the vertical coordinate
