@@ -15,6 +15,7 @@ namespace Conway
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
+            Server server = Server.GetInstance();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

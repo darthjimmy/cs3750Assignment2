@@ -11,9 +11,24 @@ namespace Conway
     public class Server {
         private bool _running;
         private GameBoard _lastBoard;
+        private static readonly Server instance = new Server();
 
         public event EventHandler EndOfTick;
 
+        static Server()
+        {}
+
+        private Server()
+        {
+            _running = false;
+            _lastBoard = Utils.FillBoard(50, 0);
+        }
+
+        public static Server GetInstance()
+        {
+            return instance;
+        }
+        
         public Server(int size, int numAlive)
         {
             _running = false;
@@ -46,7 +61,7 @@ namespace Conway
 
             while (_running) // only break when killed...
             {
-                Task.Delay(1000);
+                Task.Delay(10000);
 
                 // start of our tick
                 curBoard = new GameBoard(_lastBoard);
