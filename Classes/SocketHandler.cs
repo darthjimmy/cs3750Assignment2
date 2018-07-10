@@ -68,6 +68,7 @@ namespace Conway
                                 //response = "Starting a new game!";
                                 response = JsonConvert.SerializeObject(await NewGame());
                                 break;
+
                             case "start":
                                 //response = "Starting Server";
                                 if (_server == null)
@@ -75,8 +76,17 @@ namespace Conway
 
                                 response = JsonConvert.SerializeObject(_server.GetBoard());
                                 break;
+
                             case "update":
-                            
+                                if (_server == null)
+                                    await NewGame();
+
+                                _server.GetBoard().Cells[message.X, message.Y].Alive = true;
+                                _server.GetBoard().Cells[message.X, message.Y].Color = message.Color.ToString();
+
+                                response = JsonConvert.SerializeObject(_server.GetBoard());
+                                break;
+
                             case "Stop":
                                 response = "Stopping Server";
                                 _server.Stop();
