@@ -24,7 +24,7 @@ namespace Conway
             _socket = socket;
         }
 
-        async Task<GameBoard> NewGame()
+        void NewGame()
         {
             if (_server != null)
             {
@@ -33,7 +33,26 @@ namespace Conway
             }
 
             _server = new Server(50, 0);
-            return await Task.Run( () => _server.GetBoard());
+            _server.EndOfTick += server_EndOfTick;
+            _server.Start();
+        }
+
+        void ResumeGame()
+        {
+            if (_server == null)
+            {
+                NewGame();
+            }
+            else
+            {
+                _server.Start();
+            }
+        }
+        private async void server_EndOfTick(object sender, EventArgs e)
+        {
+            var response = JsonConvert.SerializeObject(_server.GetBoard());
+            var outgoing = Encoding.ASCII.GetBytes(response);
+            await this._socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
         }
 
         async Task EchoLoop()
@@ -66,20 +85,24 @@ namespace Conway
                         {
                             case "NewGame":
                                 //response = "Starting a new game!";
-                                response = JsonConvert.SerializeObject(await NewGame());
+                                NewGame();
+
+                                response = "New game created";
                                 break;
 
                             case "start":
                                 //response = "Starting Server";
                                 if (_server == null)
-                                    await NewGame();
+                                    NewGame();
+                                else
+                                    _server.Start();
 
-                                response = JsonConvert.SerializeObject(_server.GetBoard());
+                                response = "Server has been started";
                                 break;
 
                             case "update":
                                 if (_server == null)
-                                    await NewGame();
+                                    NewGame();
 
                                 _server.GetBoard().Cells[message.X, message.Y].Alive = true;
                                 _server.GetBoard().Cells[message.X, message.Y].Color = message.Color.ToString();

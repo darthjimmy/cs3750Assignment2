@@ -12,6 +12,8 @@ namespace Conway
         private bool _running;
         private GameBoard _lastBoard;
 
+        public event EventHandler EndOfTick;
+
         public Server(int size, int numAlive)
         {
             _running = false;
@@ -21,6 +23,14 @@ namespace Conway
         public void Stop()
         {
             _running = false;
+        }
+
+        public void Start()
+        {
+            if (!_running)
+            {
+                Task.Run(() => Run());
+            }
         }
 
         public GameBoard GetBoard()
@@ -88,6 +98,8 @@ namespace Conway
                 // send the results of our tick to the client (curBoard)
 
                 _lastBoard = new GameBoard(curBoard);
+                EndOfTick?.Invoke(this, new EventArgs());
+
                 // end of our tick
             }
         }
