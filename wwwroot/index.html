@@ -105,6 +105,11 @@
       //  alert("arr at that location: " + arr[x][y]);
            
        }
+         websocket.onclose = function (event)
+         {
+            alert("Socket closed");   
+         }
+         
          
          websocket.onmessage = function (event)
                  {
