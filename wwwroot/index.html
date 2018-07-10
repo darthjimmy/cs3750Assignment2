@@ -20,22 +20,27 @@
      <script>
          
              
-             var url = "ws://" + window.location.host + "/conway/ws"
+        var url = "ws://" + window.location.host + "/conway/ws";
+        var websocket = new WebSocket(url);
+         websocket.onopen = function (event)
+         {
+            alert("websocket open");
+         }
             // alert("opening socket");
              //var websocket = new WebSocket(url);
             // alert("step2");
-         var color = "None";
-         var helper;
+        var color = "None";
+        var helper;
         var i;
         var k;
         var arr = new Array(51);//[50,50] This is for the starting arr
         var arr2 = new Array(51);//[50,50] This is for the ending arr
         var arrC = new Array(2);
-         var x;
-         var y;
+        var x;
+        var y;
          
-         var w;
-         var z;
+        var w;
+        var z;
         for (var i = 0;i<51;i++)
         {
          arr[i] = new Array(51); 
@@ -45,8 +50,8 @@
         {
           for (k =0;k<51;k++)
           {
-             arr[i][k] = false;
-             arr2[i][k] = {color: "white"};
+             arr2[i][k] = false;
+             arr[i][k] = {color: "white"};
           }
         }
         var c=document.getElementById("chart");
@@ -87,71 +92,44 @@
           y = event.clientY - 3     // Get the vertical coordinate
          y = Math.round(y/10);
           var coor = "X coords: " + x + ", Y coords: " + y;
-          if (arr[x][y] == false)
-          {
-           arr[x][y]=true;
-          }
-           else
-           {
-            arr[x][y] = false;   
-           }
+          
+           websocket.send(JSON.stringify({
+                     command: "update",
+                     x: w,
+                     y: z,
+                     color: color
+                     }));
+            websocket.onmessage = function (event)
+                 {
+                    alert(event.data);   
+                    arr = JSON.parse(event.data);
+                     //arr2 = JSON.parse(event.data);
+                     //color = JSON.parse(event.id);
+                    //websocket.close();
+                     //alert("socket closed");
+                     //colorinnew();
+                    colorin();
+                 }
+           
        //  alert(coor);
       //  alert("arr at that location: " + arr[x][y]);
-           colorin();
+           
        }
          
          function colorin()
          {
-             if(arr[x][y] == false)
+             for (i = 0;i < 49;i++)
              {
-                 w = x;
-                 z = y;
-                x = Math.floor(x * 10);
-                y = Math.floor(y * 10);
-                ctx.fillStyle = White;
-                ctx.fillRect(x, y, -9, -9);
-                 
-                  websocket.send(JSON.stringify({
-                     command: "update",
-                     x: w,
-                     y: z,
-                     color: color
-                     }));
-                 websocket.onmessage = function (event)
-                 {
-                    alert(event.data);   
-                     //arr2 = JSON.parse(event.data);
-                     //color = JSON.parse(event.id);
-                    //websocket.close();
-                     //alert("socket closed");
-                     //colorinnew();
-                 }
-            }
-             else
-             {
-                 w = x;
-                 z = y;
-                 x = Math.floor(x * 10);
-                y = Math.floor(y * 10);
-                ctx.fillStyle = color;
-                ctx.fillRect(x, y, -9, -9);
-                 
-                 websocket.send(JSON.stringify({
-                     command: "update",
-                     x: w,
-                     y: z,
-                     color: color
-                     }));
-                 websocket.onmessage = function (event)
-                 {
-                    alert(event.data);   
-                     //arr2 = JSON.parse(event.data);
-                     //color = JSON.parse(event.id);
-                    //websocket.close();
-                     //alert("socket closed");
-                     //colorinnew();
-                 }
+                    for (l = 0; l < 49; i++)
+                    {
+                        color = arr[i][l]
+                        x = Math.floor(i * 10);
+                        y = Math.floor(l * 10);
+                        ctx.fillStyle = color;
+                        ctx.fillRect(x, y, -9, -9);
+                    }
              }
+             
          }
          
          function clearer()
@@ -181,7 +159,7 @@
             // alert("no");
              //alert("opening socket");
              
-             var websocket = new WebSocket(url);
+             //var websocket = new WebSocket(url);
              //alert("step2");
              //JSON.stringify(arr)}, 
                  websocket.onopen = function (event)
