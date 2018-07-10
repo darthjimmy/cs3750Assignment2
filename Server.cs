@@ -35,11 +35,6 @@ namespace Conway
 
         public GameBoard GetBoard()
         {
-            if (!_running)
-            {
-                Task.Run(() => Run());
-            }
-
             return _lastBoard;
         }
 
@@ -52,7 +47,7 @@ namespace Conway
             while (_running) // only break when killed...
             {
                 Task.Delay(1000);
-                
+
                 // start of our tick
                 curBoard = new GameBoard(_lastBoard);
 
