@@ -112,7 +112,7 @@
              
               
          }
-         websocket.onerror(evt)
+         websocket.onerror = function(evt)
          {
           alert(evt.data);
              alert(evt.code);
