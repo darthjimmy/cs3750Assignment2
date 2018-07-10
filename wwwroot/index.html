@@ -46,7 +46,7 @@
           for (k =0;k<51;k++)
           {
              arr[i][k] = false;
-             arr2[i][k] = false;
+             arr2[i][k] = {color: "white"};
           }
         }
         var c=document.getElementById("chart");
@@ -110,25 +110,22 @@
                 y = Math.floor(y * 10);
                 ctx.fillStyle = White;
                 ctx.fillRect(x, y, -9, -9);
-                arrC[0] = w;
-                arrC[1] = z;
                  
-                 /* websocket.send(JSON.stringify({
+                  websocket.send(JSON.stringify({
                      command: "update",
-                     id: White,
-                     data: arrC
+                     x: w,
+                     y: z,
+                     color: color
                      }));
-                     alert("info sent");
                  websocket.onmessage = function (event)
                  {
                     alert(event.data);   
-                     alert("info back");
                      //arr2 = JSON.parse(event.data);
                      //color = JSON.parse(event.id);
                     //websocket.close();
                      //alert("socket closed");
                      //colorinnew();
-                 }*/
+                 }
             }
              else
              {
@@ -138,25 +135,22 @@
                 y = Math.floor(y * 10);
                 ctx.fillStyle = color;
                 ctx.fillRect(x, y, -9, -9);
-                arrC[0] = w;
-                arrC[1] = z;
                  
-                /* websocket.send(JSON.stringify({
+                 websocket.send(JSON.stringify({
                      command: "update",
-                     id: color,
-                     data: arrC
+                     x: w,
+                     y: z,
+                     color: color
                      }));
-                     alert("info sent");
                  websocket.onmessage = function (event)
                  {
                     alert(event.data);   
-                     alert("info back");
                      //arr2 = JSON.parse(event.data);
                      //color = JSON.parse(event.id);
                     //websocket.close();
                      //alert("socket closed");
                      //colorinnew();
-                 }*/
+                 }
              }
          }
          
