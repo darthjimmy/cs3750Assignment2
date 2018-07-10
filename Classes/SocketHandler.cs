@@ -117,6 +117,10 @@ namespace Conway
                         }
                     }
                 }
+                else
+                {
+                    await _socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Close received",CancellationToken.None )
+                }
 
                 var outgoing = Encoding.ASCII.GetBytes(response);
                 await this._socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
