@@ -92,7 +92,7 @@
           y = event.clientY - 3     // Get the vertical coordinate
          y = Math.round(y/10);
           var coor = "X coords: " + x + ", Y coords: " + y;
-          alert(coor);
+         // alert(coor);
            websocket.send(JSON.stringify({
                      command: "update",
                      x: w,
@@ -107,20 +107,22 @@
        }
          websocket.onclose = function (event)
          {
-            alert("Socket closed");   
-              var websocket = new WebSocket(url);
-            websocket.onopen = function (event)
+            alert("Socket closed");  
+             alert(event.reason);
+             
+              
+         }
+         websocket.onerror = function(evt)
          {
-            alert("websocket open");
+          alert(evt.data);
+             alert(evt.code);
          }
-         }
-         
          
          websocket.onmessage = function (event)
                  {
                     alert(event.data);   
-                    arr = JSON.parse(event.data);
-                    alert(arr);
+                    //arr = JSON.parse(event.data);
+                  //  alert(arr);
                      //arr2 = JSON.parse(event.data);
                      //color = JSON.parse(event.id);
                     //websocket.close();
@@ -135,7 +137,7 @@
              {
                     for (l = 0; l < 49; i++)
                     {
-                        color = arr[i][l]
+                        color = arr[i,l]
                         x = Math.floor(i * 10);
                         y = Math.floor(l * 10);
                         ctx.fillStyle = color;
@@ -199,6 +201,7 @@
             }
              
          }
+         
       </script>
     </body>
 </html>
