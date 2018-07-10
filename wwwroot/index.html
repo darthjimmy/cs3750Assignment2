@@ -109,9 +109,14 @@
          {
             alert("Socket closed");  
              alert(event.reason);
+             
               
          }
-         
+         websocket.onerror(evt)
+         {
+          alert(evt.data);
+             alert(evt.code);
+         }
          
          websocket.onmessage = function (event)
                  {
