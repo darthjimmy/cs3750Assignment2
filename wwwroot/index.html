@@ -108,6 +108,11 @@
          websocket.onclose = function (event)
          {
             alert("Socket closed");   
+              var websocket = new WebSocket(url);
+            websocket.onopen = function (event)
+         {
+            alert("websocket open");
+         }
          }
          
          
