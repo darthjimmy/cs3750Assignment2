@@ -99,10 +99,18 @@
                      y: z,
                      color: color
                      }));
-            websocket.onmessage = function (event)
+            
+           
+       //  alert(coor);
+      //  alert("arr at that location: " + arr[x][y]);
+           
+       }
+         
+         websocket.onmessage = function (event)
                  {
                     alert(event.data);   
                     arr = JSON.parse(event.data);
+                    alert(arr);
                      //arr2 = JSON.parse(event.data);
                      //color = JSON.parse(event.id);
                     //websocket.close();
@@ -110,11 +118,6 @@
                      //colorinnew();
                     colorin();
                  }
-           
-       //  alert(coor);
-      //  alert("arr at that location: " + arr[x][y]);
-           
-       }
          
          function colorin()
          {
@@ -162,26 +165,7 @@
              //var websocket = new WebSocket(url);
              //alert("step2");
              //JSON.stringify(arr)}, 
-                 websocket.onopen = function (event)
-                 {
-                     //alert("socket open/sending info now");
-                     websocket.send(JSON.stringify({
-                     command: "start",
-                     id: color,
-                     data: arr
-                     }));
-                    // alert("info sent");
-                 }
-                 websocket.onmessage = function (event)
-                 {
-                    alert(event.data);   
-                     //alert("info back");
-                     //arr2 = JSON.parse(event.data);
-                     //color = JSON.parse(event.id);
-                    //websocket.close();
-                     //alert("socket closed");
-                     //colorinnew();
-                 }
+                 
                  
          }
          
