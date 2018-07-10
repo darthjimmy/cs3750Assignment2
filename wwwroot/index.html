@@ -101,7 +101,7 @@
                      }));
             websocket.onmessage = function (event)
                  {
-                    alert(event.GameBoard);   
+                    alert(event.data);   
                     arr = JSON.parse(event.data);
                      //arr2 = JSON.parse(event.data);
                      //color = JSON.parse(event.id);
