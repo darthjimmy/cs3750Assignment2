@@ -65,77 +65,81 @@ namespace Conway
 
             try
             {
-                using (var ms = new MemoryStream())
+                while (_socket.State == WebSocketState.Open)
                 {
-                    WebSocketReceiveResult incoming = null;
-
-                    do
+                    using (var ms = new MemoryStream())
                     {
-                        incoming = await this._socket.ReceiveAsync(seg, CancellationToken.None);
-                        ms.Write(seg.Array, seg.Offset, incoming.Count);
-                    } while (!incoming.EndOfMessage);
+                        WebSocketReceiveResult incoming = null;
 
-                    ms.Seek(0, SeekOrigin.Begin);
-
-                    if (incoming.MessageType == WebSocketMessageType.Text)
-                    {
-                        using (var reader = new StreamReader(ms, Encoding.UTF8))
+                        do
                         {
-                            var buff = reader.ReadToEnd();
+                            incoming = await this._socket.ReceiveAsync(seg, CancellationToken.None);
+                            ms.Write(seg.Array, seg.Offset, incoming.Count);
+                        } while (!incoming.EndOfMessage);
 
-                            ClientMessage message = JsonConvert.DeserializeObject<ClientMessage>(buff);
-                            
-                            switch (message.Command)
+                        ms.Seek(0, SeekOrigin.Begin);
+
+                        if (incoming.MessageType == WebSocketMessageType.Text)
+                        {
+                            using (var reader = new StreamReader(ms, Encoding.UTF8))
                             {
-                                case "NewGame":
-                                    //response = "Starting a new game!";
-                                    NewGame();
+                                var buff = reader.ReadToEnd();
 
-                                    response = "New game created";
-                                    break;
-
-                                case "start":
-                                    //response = "Starting Server";
-                                    if (_server == null)
-                                        NewGame();
-                                    else
-                                        _server.Start();
-
-                                    response = "Server has been started";
-                                    break;
-
-                                case "update":
-                                    if (_server == null)
+                                ClientMessage message = JsonConvert.DeserializeObject<ClientMessage>(buff);
+                                
+                                switch (message.Command)
+                                {
+                                    case "NewGame":
+                                        //response = "Starting a new game!";
                                         NewGame();
 
-                                    _server.GetBoard().Cells[message.X, message.Y].Alive = true;
-                                    _server.GetBoard().Cells[message.X, message.Y].Color = message.Color;
+                                        response = "New game created";
+                                        break;
 
-                                    response = JsonConvert.SerializeObject(_server.GetBoard());
-                                    break;
+                                    case "start":
+                                        //response = "Starting Server";
+                                        if (_server == null)
+                                            NewGame();
+                                        else
+                                            _server.Start();
 
-                                case "Stop":
-                                    response = "Stopping Server";
-                                    _server.Stop();
-                                    break;
+                                        response = "Server has been started";
+                                        break;
+
+                                    case "update":
+                                        if (_server == null)
+                                            NewGame();
+
+                                        _server.GetBoard().Cells[message.X, message.Y].Alive = true;
+                                        _server.GetBoard().Cells[message.X, message.Y].Color = message.Color;
+
+                                        response = JsonConvert.SerializeObject(_server.GetBoard());
+                                        break;
+
+                                    case "Stop":
+                                        response = "Stopping Server";
+                                        _server.Stop();
+                                        break;
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        await _socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Close received",CancellationToken.None );
-                    }
+                        else
+                        {
+                            await _socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Close received",CancellationToken.None );
+                        }
 
-                    var outgoing = Encoding.ASCII.GetBytes(response);
-                    if (_socket.State == WebSocketState.Open)
-                        await this._socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
-                    
+                        var outgoing = Encoding.ASCII.GetBytes(response);
+                        if (_socket.State == WebSocketState.Open)
+                            await this._socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
+                        
+                    }
                 }
             } 
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            
         }
         static async Task Acceptor(HttpContext hc, Func<Task> n)
         {
