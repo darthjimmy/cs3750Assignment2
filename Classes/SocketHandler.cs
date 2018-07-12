@@ -28,28 +28,15 @@ namespace Conway
 
         void NewGame()
         {
-            if (_server != null)
-            {
-                _server.Stop();
-                _server = null;
-            }
-
-            _server = new Server(50, 0);
-            _server.EndOfTick += server_EndOfTick;
-            _server.Start();
+            _server.Stop();
+            _server.NewGame();
         }
 
         void ResumeGame()
         {
-            if (_server == null)
-            {
-                NewGame();
-            }
-            else
-            {
-                _server.Start();
-            }
+            _server.Start();
         }
+
         private async void server_EndOfTick(object sender, EventArgs e)
         {
             var response = JsonConvert.SerializeObject(_server.GetBoard());
@@ -90,7 +77,8 @@ namespace Conway
                                 
                                 switch (message.Command)
                                 {
-                                    case "NewGame":
+                                    case "reset":
+                                    case "newgame":
                                         //response = "Starting a new game!";
                                         NewGame();
 
@@ -117,7 +105,7 @@ namespace Conway
                                         response = JsonConvert.SerializeObject(_server.GetBoard());
                                         break;
 
-                                    case "Stop":
+                                    case "stop":
                                         response = "Stopping Server";
                                         _server.Stop();
                                         break;

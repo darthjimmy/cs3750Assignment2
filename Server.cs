@@ -28,12 +28,6 @@ namespace Conway
         {
             return instance;
         }
-        
-        public Server(int size, int numAlive)
-        {
-            _running = false;
-            _lastBoard = Utils.FillBoard(size, numAlive);
-        }
 
         public void Stop()
         {
@@ -51,6 +45,11 @@ namespace Conway
         public GameBoard GetBoard()
         {
             return _lastBoard;
+        }
+
+        public void NewGame()
+        {
+            _lastBoard = Utils.FillBoard(50, 0);
         }
 
         public async void Run()
