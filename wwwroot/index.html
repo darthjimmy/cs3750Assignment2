@@ -94,7 +94,7 @@
          y = Math.round(y/10);
           var coor = "X coords: " + x + ", Y coords: " + y;
          // alert(coor);
-           alert(color);
+         //  alert(color);
            websocket.send(JSON.stringify({
                      command: "update",
                      x: x,
@@ -102,7 +102,7 @@
                      color: color
                      }));
             
-           alert(color);
+        //   alert(color);
            
        //  alert(coor);
       //  alert("arr at that location: " + arr[x][y]);
