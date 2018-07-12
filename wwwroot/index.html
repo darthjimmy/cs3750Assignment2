@@ -108,7 +108,7 @@
          websocket.onclose = function (event)
          {
             alert("Socket closed");  
-             alert(event.reason);
+          //   alert(event.reason);
              
               
          }
@@ -121,9 +121,9 @@
          websocket.onmessage = function (event)
                  {
              
-                    alert("arry[1][1]:" + arr[1][1]);
+                    alert("arry[1][1]:" + arr[1][1].Color);
                     alert(JSON.parse(event.data));
-                    arr = JSON.parse(event.data);
+                    arr = JSON.parse(JSON.parse(event.data));
                     alert(arr);
                     alert(arr[1][1].Color);
                     alert(event.data);   
