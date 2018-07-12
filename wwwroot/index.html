@@ -30,6 +30,7 @@
              //var websocket = new WebSocket(url);
             // alert("step2");
         var color = "None";
+         var color1 = "None";
         var helper;
         var i;
         var k;
@@ -139,10 +140,10 @@
              {
                     for (l = 1; l < 49; l++)
                     {
-                        color = arr.Cells[i][l].Color;
+                        color1 = arr.Cells[i][l].Color;
                         x = Math.floor(i * 10);
                         y = Math.floor(l * 10);
-                        ctx.fillStyle = color;
+                        ctx.fillStyle = color1;
                         ctx.fillRect(x, y, -9, -9);
                     }
              }
