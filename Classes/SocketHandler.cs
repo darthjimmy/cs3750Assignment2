@@ -103,8 +103,9 @@ namespace Conway
                                         if (message.Y >= _server.GetBoard().Size)
                                             continue;
 
-                                        _server.GetBoard().Cells[message.X, message.Y].Alive = true;
-                                        _server.GetBoard().Cells[message.X, message.Y].Color = message.Color;
+                                        Cell cell = _server.GetBoard().Cells[message.X, message.Y];
+                                        cell.Color = message.Color;
+                                        cell.Alive = !cell.Alive;
 
                                         response = JsonConvert.SerializeObject(_server.GetBoard());
                                         break;

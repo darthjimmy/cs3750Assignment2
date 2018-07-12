@@ -6,6 +6,7 @@ namespace Conway
     public class Cell
     {
         private Color _color;
+        private bool _alive;
         
         public string Color
         { 
@@ -20,7 +21,21 @@ namespace Conway
         }
 
         [JsonIgnore]
-        public bool Alive { get; set; }
+        public bool Alive 
+        { 
+            get
+            {
+                return _alive;
+            }
+            set
+            {
+                _alive = value;
+                if (!value)
+                    _color = System.Drawing.Color.White;
+                else
+                    _color = System.Drawing.Color.Black;
+            }
+        }
 
         public Cell()
         {

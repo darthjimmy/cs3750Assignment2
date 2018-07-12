@@ -51,7 +51,7 @@ namespace Conway
             }
 
             // next, up one right one
-            if (Cells[x + 1, y -1].Alive)
+            if (Cells[x + 1, y - 1].Alive)
             {
                 count++;
             }
@@ -63,19 +63,19 @@ namespace Conway
             }
 
             // next, down one, right one
-            if (Cells[x + 1, y - 1].Alive)
+            if (Cells[x + 1, y + 1].Alive)
             {
                 count++;
             }
 
             // next, down one
-            if (Cells[x, y - 1].Alive)
+            if (Cells[x, y + 1].Alive)
             {
                 count++;
             }
 
             // next, left one, down one
-            if (Cells[x - 1, y - 1].Alive)
+            if (Cells[x - 1, y + 1].Alive)
             {
                 count++;
             }
@@ -87,7 +87,7 @@ namespace Conway
             }
 
             // finally, left one, up one
-            if (Cells[x - 1, y + 1].Alive)
+            if (Cells[x - 1, y - 1].Alive)
             {
                 count++;
             }

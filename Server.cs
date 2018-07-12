@@ -60,23 +60,23 @@ namespace Conway
 
             while (_running) // only break when killed...
             {
-                await Task.Delay(1000);
+                await Task.Delay(100);
 
                 // start of our tick
                 curBoard = new GameBoard(_lastBoard);
 
                 // check each of our cells
-                for (int i = 1; i < curBoard.Size; i++)
+                for (int i = 1; i < curBoard.Size - 1; i++)
                 {
-                    for (int j = 1; j < curBoard.Size; j++)
+                    for (int j = 1; j < curBoard.Size - 1; j++)
                     {
                         // Meat and potatoes of our game logic right here...
                         int neighbors = 0;
                         // RULES!
 
-                        if (_lastBoard.Cells[i,j].Alive)
+                        if (curBoard.Cells[i,j].Alive)
                         {
-                            neighbors = _lastBoard.GetLiveNeighbors(i, j);
+                            neighbors = curBoard.GetLiveNeighbors(i, j);
                             // Any live cell with fewer than two live neighbors dies
                             if (neighbors < 2)
                             {
@@ -95,7 +95,7 @@ namespace Conway
                         }
                         else
                         {
-                            neighbors = _lastBoard.GetLiveNeighbors(i, j);
+                            neighbors = curBoard.GetLiveNeighbors(i, j);
 
                             // Any dead cell with exactly three live neighbors becomes a live cell
                             if (neighbors == 3)
