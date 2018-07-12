@@ -170,21 +170,21 @@
          {
              websocket.send(JSON.stringify({
                      command: "start"
-             });   
+             }));   
          }
                             
         function reseter()
              {
               websocket.send(JSON.stringify({
                      command: "reset" 
-              });
+              }));
              }
                              
          function stoper()
                  {
                     websocket.send(JSON.stringify({
                      command: "stop"
-                    });
+                    }));
                  }
          
          function colorinnew()
