@@ -121,8 +121,9 @@
          websocket.onmessage = function (event)
                  {
                     alert(event.data);   
-                    //arr = JSON.parse(event.data);
-                  //  alert(arr);
+                    jsonparse = JSON.parse(event.data);
+                    alert(jsonparse);
+                    alert(jsonparse[1,1]);
                      //arr2 = JSON.parse(event.data);
                      //color = JSON.parse(event.id);
                     //websocket.close();
@@ -137,7 +138,7 @@
              {
                     for (l = 0; l < 49; i++)
                     {
-                        color = arr[i,l]
+                        color = arr[i][l]
                         x = Math.floor(i * 10);
                         y = Math.floor(l * 10);
                         ctx.fillStyle = color;
