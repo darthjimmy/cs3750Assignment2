@@ -102,7 +102,7 @@ namespace Conway
                                         _server.GetBoard().Cells[message.X, message.Y].Alive = true;
                                         _server.GetBoard().Cells[message.X, message.Y].Color = message.Color;
 
-                                        //response = JsonConvert.SerializeObject(_server.GetBoard());
+                                        response = JsonConvert.SerializeObject(_server.GetBoard());
                                         break;
 
                                     case "stop":
@@ -118,7 +118,7 @@ namespace Conway
                         }
 
                         var outgoing = Encoding.ASCII.GetBytes(response);
-                        if (_socket.State == WebSocketState.Open)
+                        if (_socket.State == WebSocketState.Open && response.Length > 0)
                             await this._socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
                         
                     }
