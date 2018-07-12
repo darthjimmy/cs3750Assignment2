@@ -24,7 +24,7 @@
         var websocket = new WebSocket(url);
          websocket.onopen = function (event)
          {
-            alert("websocket open");
+           // alert("websocket open");
          }
             // alert("opening socket");
              //var websocket = new WebSocket(url);
@@ -51,7 +51,7 @@
           for (k =0;k<51;k++)
           {
              arr2[i][k] = false;
-             arr[i,k] = {"color": "white"};
+             arr[i][k] = {"color": "white"};
           }
         }
         var c=document.getElementById("chart");
@@ -120,8 +120,12 @@
          
          websocket.onmessage = function (event)
                  {
+                    var info = JSON.parse(event.data);
+                    alert(info);
+                    alert(info[1]);
+                    alert(info[1][1]);
                     alert(event.data);   
-                    arr = (JSON.parse(event.data));
+                    alert(JSON.parse(event.data));
                     alert(arr);
                     //alert(arr[1][1].color);
                      //arr2 = JSON.parse(event.data);
