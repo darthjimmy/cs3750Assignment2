@@ -120,14 +120,8 @@
          
          websocket.onmessage = function (event)
                  {
-             
-                    alert("arry[1][1]:" + arr[1][1].Color);
-                    alert(JSON.parse(event.data));
                     arr = JSON.parse(event.data);
-                    alert(arr);
-                    alert(arr.Cells[1][1].Color);
-                    alert(event.data);   
-                    alert(arr);
+                    //alert(arr.Cells[1][1].Color);
                     //alert(arr[1][1].color);
                      //arr2 = JSON.parse(event.data);
                      //color = JSON.parse(event.id);
@@ -139,17 +133,17 @@
          
          function colorin()
          {
-             /*for (i = 0;i < 49;i++)
+             for (i = 0;i < 49;i++)
              {
                     for (l = 0; l < 49; i++)
                     {
-                        color = arr[i][l]
+                        color = arr.Cells[i][l].Color
                         x = Math.floor(i * 10);
                         y = Math.floor(l * 10);
                         ctx.fillStyle = color;
                         ctx.fillRect(x, y, -9, -9);
                     }
-             }*/
+             }
              
          }
          
