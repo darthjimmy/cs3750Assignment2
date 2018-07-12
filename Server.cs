@@ -60,7 +60,7 @@ namespace Conway
 
             while (_running) // only break when killed...
             {
-                await Task.Delay(10000);
+                await Task.Delay(5000);
 
                 // start of our tick
                 curBoard = new GameBoard(_lastBoard);
