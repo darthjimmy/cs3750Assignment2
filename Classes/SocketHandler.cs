@@ -82,7 +82,7 @@ namespace Conway
                                         //response = "Starting a new game!";
                                         NewGame();
 
-                                        response = "New game created";
+                                        //response = "New game created";
                                         break;
 
                                     case "start":
@@ -92,7 +92,7 @@ namespace Conway
                                         else
                                             _server.Start();
 
-                                        response = "Server has been started";
+                                        //response = "Server has been started";
                                         break;
 
                                     case "update":
@@ -102,11 +102,11 @@ namespace Conway
                                         _server.GetBoard().Cells[message.X, message.Y].Alive = true;
                                         _server.GetBoard().Cells[message.X, message.Y].Color = message.Color;
 
-                                        response = JsonConvert.SerializeObject(_server.GetBoard());
+                                        //response = JsonConvert.SerializeObject(_server.GetBoard());
                                         break;
 
                                     case "stop":
-                                        response = "Stopping Server";
+                                        //response = "Stopping Server";
                                         _server.Stop();
                                         break;
                                 }
