@@ -147,14 +147,14 @@
                         color1 = arr.Cells[i][l].Color;
                         x = Math.floor(i * 10);
                         y = Math.floor(l * 10);
-                        if (x == 500 || y == 500 || x == 10 || y == 10)
-                        {
-                            ctx.fillStyle = White;   
-                        }
-                        else
-                        {
+                       // if (x == 500 || y == 500 || x == 10 || y == 10)
+                       // {
+                      //      ctx.fillStyle = White;   
+                      //  }
+                      //  else
+                       // {
                          ctx.fillStyle = color1;
-                        }
+                       // }
                         ctx.fillRect(x, y, -9, -9);
                     }
              }
