@@ -121,7 +121,7 @@
          websocket.onmessage = function (event)
                  {
              
-                    alert(arr);
+                    alert(arr[1][1]);
                     alert(JSON.parse(event.data));
                     arr = JSON.parse(event.data);
                     alert(arr);
