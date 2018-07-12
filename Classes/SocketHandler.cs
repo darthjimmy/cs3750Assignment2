@@ -23,6 +23,7 @@ namespace Conway
         {
             _socket = socket;
             _server = Server.GetInstance();
+            _server.EndOfTick += server_EndOfTick;
         }
 
         void NewGame()
