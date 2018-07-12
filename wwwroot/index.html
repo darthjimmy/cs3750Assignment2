@@ -7,8 +7,8 @@
        
        <canvas id="chart" width="500" height="500" onclick="findCoords(event)"></canvas>  
         <input type="Submit" id="starter" name="starter" value="Start Game" onclick=starter1()>
-        <input type="Submit" id="stopper" name="stopper" value="Stop Game">
-        <input type="Submit" id="reseter" name="reseter" value="Reset Game">
+        <input type="Submit" id="stopper" name="stopper" value="Stop Game" onclick=stoper()>
+        <input type="Submit" id="reseter" name="reseter" value="Reset Game" onclick=reseter()>
         <input type="Submit" id="clearerb" name="clearerb" value="Clear Board" onclick=clearer()>
         <select name="color" id ="clientC" onchange=clienter()>
             <option value="None" selected="selected">Choose Color</option>
@@ -168,18 +168,24 @@
          
          function starter1()
          {
-             alert("Hi");
-            //var jsonString = 
-            // alert(jsonstring);
-            // alert("no");
-             //alert("opening socket");
-             
-             //var websocket = new WebSocket(url);
-             //alert("step2");
-             //JSON.stringify(arr)}, 
-                 
-                 
+             websocket.send(JSON.stringify({
+                     command: "start"
+             });   
          }
+                            
+        function reseter()
+             {
+              websocket.send(JSON.stringify({
+                     command: "reset" 
+              });
+             }
+                             
+         function stoper()
+                 {
+                    websocket.send(JSON.stringify({
+                     command: "stop"
+                    });
+                 }
          
          function colorinnew()
          {
