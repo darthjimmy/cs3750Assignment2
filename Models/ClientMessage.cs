@@ -13,7 +13,7 @@ namespace Conway
     {
         public string Command { get; set; }
         
-        public Color Color { get; set; }
+        public string Color { get; set; }
 
         public int X { get; set; }
         public int Y { get; set; }

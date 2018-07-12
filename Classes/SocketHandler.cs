@@ -109,7 +109,7 @@ namespace Conway
                                         NewGame();
 
                                     _server.GetBoard().Cells[message.X, message.Y].Alive = true;
-                                    _server.GetBoard().Cells[message.X, message.Y].Color = message.Color.ToString();
+                                    _server.GetBoard().Cells[message.X, message.Y].Color = message.Color;
 
                                     response = JsonConvert.SerializeObject(_server.GetBoard());
                                     break;
