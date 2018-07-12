@@ -66,9 +66,9 @@ namespace Conway
                 curBoard = new GameBoard(_lastBoard);
 
                 // check each of our cells
-                for (int i = 1; i < curBoard.Size - 1; i++)
+                for (int i = 1; i < curBoard.Size; i++)
                 {
-                    for (int j = 1; j < curBoard.Size - 1; j++)
+                    for (int j = 1; j < curBoard.Size; j++)
                     {
                         // Meat and potatoes of our game logic right here...
                         int neighbors = 0;

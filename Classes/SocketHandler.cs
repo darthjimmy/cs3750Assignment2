@@ -96,8 +96,12 @@ namespace Conway
                                         break;
 
                                     case "update":
-                                        if (_server == null)
-                                            NewGame();
+
+                                        if (message.X >= _server.GetBoard().Size)
+                                            continue;
+                                        
+                                        if (message.Y >= _server.GetBoard().Size)
+                                            continue;
 
                                         _server.GetBoard().Cells[message.X, message.Y].Alive = true;
                                         _server.GetBoard().Cells[message.X, message.Y].Color = message.Color;
