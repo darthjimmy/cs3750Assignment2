@@ -93,11 +93,11 @@
           y = event.clientY - 3     // Get the vertical coordinate
          y = Math.round(y/10);
           var coor = "X coords: " + x + ", Y coords: " + y;
-           if (x == 50 || y == 50 || x == 1 || y == 1)
+           if (x == 50 || y == 50 || x == 1 || y == 1 || x == 49 || y == 49)
            {
                 return;   
            }
-          alert(coor);
+          //alert(coor);
          //  alert(color);
            websocket.send(JSON.stringify({
                      command: "update",
@@ -147,7 +147,7 @@
                         color1 = arr.Cells[i][l].Color;
                         x = Math.floor(i * 10);
                         y = Math.floor(l * 10);
-                        if (x == 500 || y == 500 || x == 10 || y == 10)
+                        if (x == 500 || y == 500 || x == 10 || y == 10 || x == 490 || y == 490)
                         {
                             ctx.fillStyle = "#FFFFFF";   
                         }
