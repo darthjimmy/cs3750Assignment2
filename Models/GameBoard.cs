@@ -39,6 +39,7 @@ namespace Conway
                 }
             }
 
+            return newBoard;
         }
 
         // copy constructor

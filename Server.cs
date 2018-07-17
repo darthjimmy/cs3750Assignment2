@@ -66,7 +66,7 @@ namespace Conway
                 await Task.Delay(100);
 
                 // start of our tick
-                curBoard = new GameBoard(_lastBoard);
+                curBoard = _lastBoard;
 
                 // check each of our cells
                 for (int i = 1; i < curBoard.Size - 1; i++)
