@@ -66,7 +66,7 @@ namespace Conway
                 await Task.Delay(100);
 
                 // start of our tick
-                curBoard = _lastBoard;
+                curBoard = GameBoard.Copy(_lastBoard);
 
                 // check each of our cells
                 for (int i = 1; i < curBoard.Size - 1; i++)
@@ -81,7 +81,7 @@ namespace Conway
 
                         if (curBoard.Cells[i,j].Alive)
                         {
-                            neighbors = curBoard.GetLiveNeighbors(i, j, out colors);
+                            neighbors = _lastBoard.GetLiveNeighbors(i, j, out colors);
                             // Any live cell with fewer than two live neighbors dies
                             if (neighbors < 2)
                             {
@@ -103,7 +103,7 @@ namespace Conway
                         }
                         else
                         {
-                            neighbors = curBoard.GetLiveNeighbors(i, j, out colors);
+                            neighbors = _lastBoard.GetLiveNeighbors(i, j, out colors);
 
                             // Any dead cell with exactly three live neighbors becomes a live cell
                             if (neighbors == 3)
