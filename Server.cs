@@ -86,19 +86,19 @@ namespace Conway
                             if (neighbors < 2)
                             {
                                 curBoard.Cells[i,j].Alive = false;
-                                curBoard.Cells[i,j].Color = ColorTranslator.ToHtml(Color.White);
+                                curBoard.Cells[i,j].SetColor(Color.White);
                             }
                             else if (neighbors == 2 || neighbors == 3)
                             {
                                 // Any live cell with two or three live neighbors lives
                                 curBoard.Cells[i,j].Alive = true;
-                                curBoard.Cells[i,j].Color = ColorTranslator.ToHtml(Utils.CombineColors(colors.ToArray()));
+                                curBoard.Cells[i,j].SetColor(colors[0]);
                             }
                             else if (neighbors > 3)
                             {
                                 // Any live cell with more than three live neighbors dies
                                 curBoard.Cells[i,j].Alive = false;
-                                curBoard.Cells[i,j].Color = ColorTranslator.ToHtml(Color.White);
+                                curBoard.Cells[i,j].SetColor(Color.White);
                             }
                         }
                         else
@@ -109,7 +109,7 @@ namespace Conway
                             if (neighbors == 3)
                             {
                                 curBoard.Cells[i,j].Alive = true;
-                                curBoard.Cells[i,j].Color = ColorTranslator.ToHtml(Utils.CombineColors(colors.ToArray()));
+                                curBoard.Cells[i,j].SetColor(colors[0]);
                             }
                         }
                     }
@@ -118,7 +118,7 @@ namespace Conway
                 // send the results of our tick to the client (curBoard)
                 if (_running)
                 {
-                    _lastBoard = new GameBoard(curBoard);
+                    await Task.Run(() => _lastBoard = GameBoard.Copy(curBoard));
                     EndOfTick?.Invoke(this, new EventArgs());
                 }
                 // end of our tick

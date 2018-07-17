@@ -26,18 +26,25 @@ namespace Conway
             }
         }
 
+        public static GameBoard Copy(GameBoard oldBoard)
+        {
+            GameBoard newBoard = new GameBoard(oldBoard.Size);
+
+            newBoard.Cells = new Cell[newBoard.Size, newBoard.Size];
+            for (int i = 0; i < newBoard.Size; i++)
+            {
+                for (int j = 0; j < newBoard.Size; j++)
+                {
+                    newBoard.Cells[i, j] = new Cell(oldBoard.Cells[i, j]);
+                }
+            }
+
+        }
+
         // copy constructor
         public GameBoard(GameBoard oldBoard)
         {
-            Size = oldBoard.Size;
-            Cells = new Cell[Size, Size];
-            for (int i = 0; i < Size; i++)
-            {
-                for (int j = 0; j < Size; j++)
-                {
-                    Cells[i, j] = new Cell(oldBoard.Cells[i, j]);
-                }
-            }
+            
         }
 
         public int GetLiveNeighbors(int x, int y, out List<Color> colors)

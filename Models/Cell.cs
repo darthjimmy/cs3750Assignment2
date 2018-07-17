@@ -8,6 +8,11 @@ namespace Conway
         private Color _color;
         private bool _alive;
         
+        public void SetColor(Color color)
+        {
+            _color = color;
+        }
+
         public string Color
         { 
             get
