@@ -32,8 +32,6 @@ namespace Conway
                 _alive = value;
                 if (!value)
                     _color = System.Drawing.Color.White;
-                else
-                    _color = System.Drawing.Color.Black;
             }
         }
 

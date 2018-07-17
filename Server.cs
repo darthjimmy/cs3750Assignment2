@@ -5,6 +5,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Conway;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace Conway
 {
@@ -75,34 +77,39 @@ namespace Conway
                         int neighbors = 0;
                         // RULES!
 
+                        List<Color> colors = new List<Color>();
+
                         if (curBoard.Cells[i,j].Alive)
                         {
-                            neighbors = curBoard.GetLiveNeighbors(i, j);
+                            neighbors = curBoard.GetLiveNeighbors(i, j, out colors);
                             // Any live cell with fewer than two live neighbors dies
                             if (neighbors < 2)
                             {
                                 curBoard.Cells[i,j].Alive = false;
-                                curBoard.Cells[i,j].Color = System.Drawing.Color.White.ToString();
+                                curBoard.Cells[i,j].Color = ColorTranslator.ToHtml(Color.White);
                             }
                             else if (neighbors == 2 || neighbors == 3)
                             {
                                 // Any live cell with two or three live neighbors lives
                                 curBoard.Cells[i,j].Alive = true;
+                                curBoard.Cells[i,j].Color = ColorTranslator.ToHtml(Utils.CombineColors(colors.ToArray()));
                             }
                             else if (neighbors > 3)
                             {
                                 // Any live cell with more than three live neighbors dies
                                 curBoard.Cells[i,j].Alive = false;
+                                curBoard.Cells[i,j].Color = ColorTranslator.ToHtml(Color.White);
                             }
                         }
                         else
                         {
-                            neighbors = curBoard.GetLiveNeighbors(i, j);
+                            neighbors = curBoard.GetLiveNeighbors(i, j, out colors);
 
                             // Any dead cell with exactly three live neighbors becomes a live cell
                             if (neighbors == 3)
                             {
                                 curBoard.Cells[i,j].Alive = true;
+                                curBoard.Cells[i,j].Color = ColorTranslator.ToHtml(Utils.CombineColors(colors.ToArray()));
                             }
                         }
                     }

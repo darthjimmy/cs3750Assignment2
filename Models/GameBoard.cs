@@ -40,56 +40,66 @@ namespace Conway
             }
         }
 
-        public int GetLiveNeighbors(int x, int y)
+        public int GetLiveNeighbors(int x, int y, out List<Color> colors)
         {
             int count = 0;
+
+            colors = new List<Color>();
 
             // Start up
             if (Cells[x, y - 1].Alive)
             {
                 count++;
+                colors.Add(Color.FromName(Cells[x, y - 1].Color));
             }
 
             // next, up one right one
             if (Cells[x + 1, y - 1].Alive)
             {
                 count++;
+                colors.Add(Color.FromName(Cells[x + 1, y - 1].Color));
             }
 
             // next, right one
             if (Cells[x + 1, y].Alive)
             {
                 count++;
+                colors.Add(Color.FromName(Cells[x + 1, y].Color));
             }
 
             // next, down one, right one
             if (Cells[x + 1, y + 1].Alive)
             {
                 count++;
+                colors.Add(Color.FromName(Cells[x + 1, y + 1].Color));
             }
 
             // next, down one
             if (Cells[x, y + 1].Alive)
             {
                 count++;
+                colors.Add(Color.FromName(Cells[x, y + 1].Color));
             }
 
             // next, left one, down one
             if (Cells[x - 1, y + 1].Alive)
             {
                 count++;
+                colors.Add(Color.FromName(Cells[x - 1, y + 1].Color));
             }
 
             // next, left one
             if (Cells[x - 1, y].Alive)
             {
                 count++;
+                colors.Add(Color.FromName(Cells[x - 1, y].Color));
             }
 
             // finally, left one, up one
             if (Cells[x - 1, y - 1].Alive)
             {
                 count++;
+                colors.Add(Color.FromName(Cells[x - 1, y - 1].Color));
             }
 
             return count;
