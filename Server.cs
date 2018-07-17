@@ -123,6 +123,8 @@ namespace Conway
                 }
                 // end of our tick
             }
+
+            EndOfTick?.Invoke(this, new EventArgs());
         }
     }
 }
