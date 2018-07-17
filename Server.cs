@@ -50,6 +50,7 @@ namespace Conway
         public void NewGame()
         {
             _lastBoard = Utils.FillBoard(50, 0);
+            Start();
         }
 
         public async void Run()
@@ -81,6 +82,7 @@ namespace Conway
                             if (neighbors < 2)
                             {
                                 curBoard.Cells[i,j].Alive = false;
+                                curBoard.Cells[i,j].Color = System.Drawing.Color.White.ToString();
                             }
                             else if (neighbors == 2 || neighbors == 3)
                             {
@@ -107,10 +109,11 @@ namespace Conway
                 }
 
                 // send the results of our tick to the client (curBoard)
-
-                _lastBoard = new GameBoard(curBoard);
-                EndOfTick?.Invoke(this, new EventArgs());
-
+                if (_running)
+                {
+                    _lastBoard = new GameBoard(curBoard);
+                    EndOfTick?.Invoke(this, new EventArgs());
+                }
                 // end of our tick
             }
         }
