@@ -16,6 +16,7 @@ namespace Conway
         private static readonly Server instance = new Server();
 
         public event EventHandler EndOfTick;
+        public event EventHandler Update;
 
         static Server()
         {}
@@ -34,6 +35,11 @@ namespace Conway
         public void Stop()
         {
             _running = false;
+        }
+
+        public void FireUpdate()
+        {
+            Update?.Invoke(this, new EventArgs());
         }
 
         public void Start()
@@ -69,9 +75,9 @@ namespace Conway
                 curBoard = GameBoard.Copy(_lastBoard);
 
                 // check each of our cells
-                for (int i = 1; i < curBoard.Size - 1; i++)
+                for (int i = 2; i < curBoard.Size - 1; i++)
                 {
-                    for (int j = 1; j < curBoard.Size - 1; j++)
+                    for (int j = 2; j < curBoard.Size - 1; j++)
                     {
                         // Meat and potatoes of our game logic right here...
                         int neighbors = 0;

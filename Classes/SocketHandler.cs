@@ -24,6 +24,7 @@ namespace Conway
             _socket = socket;
             _server = Server.GetInstance();
             _server.EndOfTick += server_EndOfTick;
+            _server.Update += server_Update;
         }
 
         void NewGame()
@@ -38,6 +39,14 @@ namespace Conway
         }
 
         private async void server_EndOfTick(object sender, EventArgs e)
+        {
+            var response = JsonConvert.SerializeObject(_server.GetBoard());
+            var outgoing = Encoding.ASCII.GetBytes(response);
+            if (_socket.State == WebSocketState.Open)
+                await this._socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+
+        private async void server_Update(object sender, EventArgs e)
         {
             var response = JsonConvert.SerializeObject(_server.GetBoard());
             var outgoing = Encoding.ASCII.GetBytes(response);
@@ -108,6 +117,7 @@ namespace Conway
                                         cell.Alive = !cell.Alive;
 
                                         response = JsonConvert.SerializeObject(_server.GetBoard());
+                                        _server.FireUpdate();
                                         break;
 
                                     case "stop":
